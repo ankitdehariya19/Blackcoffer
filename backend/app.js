@@ -7,7 +7,8 @@ import IndexRouter from "./routes/index.js"
 const app = express();
 connectDb()
 
-app.use(cors({origin:"*"}))
+app.use(cors({ origin: ["http://localhost:3000", "https://blackcoffer-beta.vercel.app"] }));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
