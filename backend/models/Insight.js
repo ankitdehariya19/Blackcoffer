@@ -1,10 +1,9 @@
-const mongoose = require('mongoose');
+import { Schema, model } from "mongoose";
 
-const dataSchema = new mongoose.Schema({
+const InsightSchema =new  Schema({
   end_year: String,
   intensity: {
-    type: Number,
-    required: true,
+    type: Number
   },
   sector: String,
   topic: String,
@@ -17,21 +16,16 @@ const dataSchema = new mongoose.Schema({
   published: String,
   country: String,
   relevance: {
-    type: Number,
-    required: true,
+    type: Number
   },
   pestle: String,
   source: String,
   title: {
     type: String,
-    required: true,
   },
   likelihood: {
-    type: Number,
-    required: true,
+    type: Number
   },
 });
 
-const Data = mongoose.model('Data', dataSchema);
-
-module.exports = Data;
+export default model("Insight", InsightSchema);

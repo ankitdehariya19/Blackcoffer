@@ -1,10 +1,9 @@
-// src/services/apiService.js
-const BASE_URL = 'http://localhost:8000/api';
+import { DASHBOARD_URL } from "../constants/routes";
 
 const apiService = {
   fetchData: async () => {
     try {
-      const response = await fetch(`${BASE_URL}/dashboard`);
+      const response = await fetch(DASHBOARD_URL);
       if (!response.ok) {
         throw new Error('Failed to fetch data');
       }

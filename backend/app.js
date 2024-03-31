@@ -1,30 +1,26 @@
-const express = require('express');
+import express from "express"
+import cors from "cors"
+import { PORT } from "./config/index.js";
+import { connectDb } from "./config/db.js";
+import IndexRouter from "./routes/index.js"
+
 const app = express();
-const cors = require('cors');
-const mongoose = require('mongoose');
-const routes = require('./routes'); 
+connectDb()
 
-// Allow requests from http://localhost:3000
-const allowedOrigins = ['http://localhost:3000'];
-app.use(cors({
-  origin: function(origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  }
-}));
-
+app.use(cors({origin:"*"}))
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-mongoose.connect('mongodb://localhost:27017/blackcoffer', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+app.get('/', (rew,res)=>{
+
+  return res.send({
+    message:"suucess"
+  })
 });
-app.use('/api', routes);
 
-const PORT = process.env.PORT || 8000;
+app.use('/api/v1/', IndexRouter);
+
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
